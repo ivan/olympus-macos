@@ -6,12 +6,13 @@ set -eu
 HERE=$(dirname "$0:A")
 
 for rec in /Volumes/*/RECORDER; do
-	echo "Fixing $rec"
 	cd "$rec"
 
 	# Make sure we're in the right place
 	ls -1d ../SYSTEM > /dev/null
 	cd ../MUSIC
+
+	echo "Fixing $PWD"
 
 	rm -f **/*.DAT || true
 
