@@ -1,0 +1,15 @@
+#!/usr/bin/env zsh
+
+# DO NOT REMOVE
+set -eu
+
+mountpoint=$1
+
+cd "$mountpoint"/MUSIC
+rm -f **/*.DAT || true
+
+for directory in **/*/; do
+	alpha-to-mtime "$directory"
+done
+
+alpha-to-mtime .

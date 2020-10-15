@@ -1,0 +1,13 @@
+#!/usr/bin/env python
+
+import os, sys, time
+os.chdir(sys.argv[1])
+dir = sorted(os.listdir('.'))
+# This usually works with just 2s instead of 60s, but go with 60s
+# to make it really obvious.
+t = time.time() - 60 * len(dir)
+
+for file in dir:
+	t += 60
+	os.utime(file, (t, t))
+	print('%s has time %s' % (file, time.ctime(t)))
