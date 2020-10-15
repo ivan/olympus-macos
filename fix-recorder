@@ -5,15 +5,19 @@ set -eu
 
 HERE=$(dirname "$0:A")
 
-cd /Volumes/*/RECORDER
-# Make sure we're in the right place
-ls -1d ../SYSTEM > /dev/null
-cd ../MUSIC
+for rec in /Volumes/*/RECORDER; do
+	echo "Fixing $rec"
+	cd "$rec"
 
-rm -f **/*.DAT || true
+	# Make sure we're in the right place
+	ls -1d ../SYSTEM > /dev/null
+	cd ../MUSIC
 
-for directory in **/*/; do
-	$HERE/alpha-to-mtime "$directory"
+	rm -f **/*.DAT || true
+
+	for directory in **/*/; do
+		$HERE/alpha-to-mtime "$directory"
+	done
+
+	$HERE/alpha-to-mtime .
 done
-
-$HERE/alpha-to-mtime .
