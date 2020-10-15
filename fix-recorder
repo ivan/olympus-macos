@@ -1,0 +1,19 @@
+#!/usr/bin/env zsh
+
+# DO NOT REMOVE
+set -eu
+
+HERE=$(dirname "$0:A")
+
+cd /Volumes/*/RECORDER
+# Make sure we're in the right place
+ls -1d ../SYSTEM > /dev/null
+cd ../MUSIC
+
+rm -f **/*.DAT || true
+
+for directory in **/*/; do
+	$HERE/alpha-to-mtime "$directory"
+done
+
+$HERE/alpha-to-mtime .
